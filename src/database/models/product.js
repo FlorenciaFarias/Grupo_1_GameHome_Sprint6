@@ -10,28 +10,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Product.belongsTo(models.Brand, {
-
-         as:"brand",
-         foreignKey: 'brandId'
-           
-
-        }),
       Product.belongsTo(models.Category,{
+        foreignKey:'categoryId',
+        as:'category'
+        
+      })
 
-        as: "category",  
-        foreignKey:'categoryId'
-            
-         }),
-      Product.belongsTo(models.Color,{
-
-        as:"color",
-        foreignKey:'colorId'
-          
-         });
-
-
+      Product.belongsTo(models.Color, {
+        foreignKey: 'colorId',
+        as: 'color'
+      });
+        Product.belongsTo(models.Brand,{
+            foreignKey:'brandId',
+          as:'brand'
+        
+        })
     }
   }
   Product.init({
@@ -43,9 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     extended_description: DataTypes.STRING,
     product_category: DataTypes.STRING,
-    categories_id: DataTypes.INTEGER,
-    colors_id: DataTypes.INTEGER,
-    brands_id: DataTypes.INTEGER,
+    categorysId: DataTypes.INTEGER,
+    colorsId: DataTypes.INTEGER,
+    brandsId: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {
     sequelize,
